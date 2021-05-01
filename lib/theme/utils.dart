@@ -10,17 +10,17 @@ ThemeData _buildLightTheme() {
     canvasColor: Colors.transparent,
     primaryIconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
-      headline: TextStyle(
+      headline5: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.black,
           fontSize: 24),
-      body1: TextStyle(
+      bodyText2: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.black,
           fontSize: 18),
-      body2: TextStyle(
+      bodyText1: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.black,
@@ -44,17 +44,17 @@ ThemeData _buildDarkTheme() {
     canvasColor: Colors.transparent,
     primaryIconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
-      headline: TextStyle(
+      headline5: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 24),
-      body1: TextStyle(
+      bodyText2: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 18),
-      body2: TextStyle(
+      bodyText1: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -78,17 +78,17 @@ ThemeData _buildAmoledTheme() {
     canvasColor: Colors.transparent,
     primaryIconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
-      headline: TextStyle(
+      headline5: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 24),
-      body1: TextStyle(
+      bodyText2: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 18),
-      body2: TextStyle(
+      bodyText1: TextStyle(
           fontFamily: 'Sans',
           fontWeight: FontWeight.bold,
           color: Colors.white,

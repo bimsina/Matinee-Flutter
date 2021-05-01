@@ -5,7 +5,7 @@ class GenresList {
 
   GenresList.fromJson(Map<String, dynamic> json) {
     if (json['genres'] != null) {
-      genres = new List<Genres>();
+      genres = [];
       json['genres'].forEach((v) {
         genres.add(new Genres.fromJson(v));
       });

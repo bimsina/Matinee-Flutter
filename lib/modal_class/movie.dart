@@ -11,7 +11,7 @@ class MovieList {
     totalMovies = json['total_results'];
     totalPages = json['total_pages'];
     if (json['results'] != null) {
-      movies = new List<Movie>();
+      movies = [];
       json['results'].forEach((v) {
         movies.add(new Movie.fromJson(v));
       });

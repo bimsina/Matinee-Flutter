@@ -118,7 +118,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                         Text(
                                           widget.movie.title,
                                           style: widget
-                                              .themeData.textTheme.headline,
+                                              .themeData.textTheme.headline5,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -128,8 +128,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                             children: <Widget>[
                                               Text(
                                                 widget.movie.voteAverage,
-                                                style: widget
-                                                    .themeData.textTheme.body2,
+                                                style: widget.themeData
+                                                    .textTheme.bodyText1,
                                               ),
                                               Icon(
                                                 Icons.star,
@@ -161,8 +161,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                   left: 8.0),
                                               child: Text(
                                                 'Overview',
-                                                style: widget
-                                                    .themeData.textTheme.body2,
+                                                style: widget.themeData
+                                                    .textTheme.bodyText1,
                                               ),
                                             ),
                                           ],
@@ -182,8 +182,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                                   left: 8.0, bottom: 4.0),
                                               child: Text(
                                                 'Release date : ${widget.movie.releaseDate}',
-                                                style: widget
-                                                    .themeData.textTheme.body2,
+                                                style: widget.themeData
+                                                    .textTheme.bodyText1,
                                               ),
                                             ),
                                           ],
@@ -273,15 +273,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 children: <Widget>[
                                   Text(
                                     '${cast.name}',
-                                    style: widget.themeData.textTheme.body1,
+                                    style: widget.themeData.textTheme.bodyText2,
                                   ),
                                   Text(
                                     'as',
-                                    style: widget.themeData.textTheme.body1,
+                                    style: widget.themeData.textTheme.bodyText2,
                                   ),
                                   Text(
                                     '${cast.character}',
-                                    style: widget.themeData.textTheme.body1,
+                                    style: widget.themeData.textTheme.bodyText2,
                                   ),
                                 ],
                               ),

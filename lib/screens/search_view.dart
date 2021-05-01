@@ -13,10 +13,9 @@ class MovieSearch extends SearchDelegate<Movie> {
     assert(context != null);
     final ThemeData theme = themeData.copyWith(
         hintColor: themeData.accentColor,
-        cursorColor: themeData.accentColor,
         primaryColor: themeData.primaryColor,
         textTheme: TextTheme(
-          title: themeData.textTheme.body2,
+          headline6: themeData.textTheme.bodyText1,
         ));
     assert(theme != null);
     return theme;
@@ -80,7 +79,7 @@ class MovieSearch extends SearchDelegate<Movie> {
               color: themeData.accentColor,
             ),
           ),
-          Text('Enter a Movie to search.', style: themeData.textTheme.body2)
+          Text('Enter a Movie to search.', style: themeData.textTheme.bodyText1)
         ],
       )),
     );

@@ -21,20 +21,20 @@ class CastAndCrew extends StatelessWidget {
               Tab(
                 child: Text(
                   'Cast',
-                  style: themeData.textTheme.body2,
+                  style: themeData.textTheme.bodyText1,
                 ),
               ),
               Tab(
                 child: Text(
                   'Crew',
-                  style: themeData.textTheme.body2,
+                  style: themeData.textTheme.bodyText1,
                 ),
               ),
             ],
           ),
           title: Text(
             'Cast And Crew',
-            style: themeData.textTheme.headline,
+            style: themeData.textTheme.headline5,
           ),
           leading: IconButton(
             icon: Icon(
@@ -95,12 +95,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits.cast[index].name,
-                          style: themeData.textTheme.body1,
+                          style: themeData.textTheme.bodyText2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Character : ' + credits.cast[index].character,
-                          style: themeData.textTheme.body2,
+                          style: themeData.textTheme.bodyText1,
                         ),
                       ],
                     ),
@@ -156,12 +156,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits.crew[index].name,
-                          style: themeData.textTheme.body1,
+                          style: themeData.textTheme.bodyText2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Job : ' + credits.crew[index].job,
-                          style: themeData.textTheme.body2,
+                          style: themeData.textTheme.bodyText1,
                         ),
                       ],
                     ),

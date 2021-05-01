@@ -16,7 +16,7 @@ class GenreMovies extends StatelessWidget {
         backgroundColor: themeData.primaryColor,
         title: Text(
           genre.name,
-          style: themeData.textTheme.headline,
+          style: themeData.textTheme.headline5,
         ),
         leading: IconButton(
           icon: Icon(

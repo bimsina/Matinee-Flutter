@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
         ),
         title: Text(
           'Log In',
-          style: themeData.textTheme.headline,
+          style: themeData.textTheme.headline5,
         ),
       ),
       body: Container(
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
         child: Center(
           child: Text(
             'Coming Soon.',
-            style: themeData.textTheme.body2,
+            style: themeData.textTheme.bodyText1,
           ),
         ),
       ),

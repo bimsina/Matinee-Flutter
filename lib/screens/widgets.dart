@@ -40,7 +40,7 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child:
-                  Text('Discover', style: widget.themeData.textTheme.headline),
+                  Text('Discover', style: widget.themeData.textTheme.headline5),
             ),
           ],
         ),
@@ -125,7 +125,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(widget.title,
-                  style: widget.themeData.textTheme.headline),
+                  style: widget.themeData.textTheme.headline5),
             ),
           ],
         ),
@@ -178,7 +178,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     moviesList[index].title,
-                                    style: widget.themeData.textTheme.body2,
+                                    style: widget.themeData.textTheme.bodyText1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 )
@@ -266,7 +266,8 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   children: <Widget>[
                                     Text(
                                       moviesList[index].title,
-                                      style: widget.themeData.textTheme.body1,
+                                      style:
+                                          widget.themeData.textTheme.bodyText2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Padding(
@@ -276,7 +277,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                           Text(
                                             moviesList[index].voteAverage,
                                             style: widget
-                                                .themeData.textTheme.body2,
+                                                .themeData.textTheme.bodyText1,
                                           ),
                                           Icon(
                                             Icons.star,
@@ -354,7 +355,8 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: <Widget>[
-                    Text(widget.title, style: widget.themeData.textTheme.body2),
+                    Text(widget.title,
+                        style: widget.themeData.textTheme.bodyText1),
                   ],
                 ),
               )
@@ -364,9 +366,9 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(widget.title,
-                        style: widget.themeData.textTheme.body2),
+                        style: widget.themeData.textTheme.bodyText1),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -459,7 +461,7 @@ class GenreList extends StatefulWidget {
 }
 
 class _GenreListState extends State<GenreList> {
-  List<Genres> _genres = new List();
+  List<Genres> _genres = [];
   @override
   void initState() {
     super.initState();
@@ -510,7 +512,7 @@ class _GenreListState extends State<GenreList> {
                           ),
                           label: Text(
                             _genres[index].name,
-                            style: widget.themeData.textTheme.body2,
+                            style: widget.themeData.textTheme.bodyText1,
                           ),
                           backgroundColor: Colors.transparent,
                         ),
@@ -557,7 +559,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
               ? Center(
                   child: Text(
                     "Oops! couldn't find the movie",
-                    style: widget.themeData.textTheme.body2,
+                    style: widget.themeData.textTheme.bodyText1,
                   ),
                 )
               : ListView.builder(
@@ -608,8 +610,8 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                       children: <Widget>[
                                         Text(
                                           moviesList[index].title,
-                                          style:
-                                              widget.themeData.textTheme.body1,
+                                          style: widget
+                                              .themeData.textTheme.bodyText2,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                         ),
@@ -617,8 +619,8 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                           children: <Widget>[
                                             Text(
                                               moviesList[index].voteAverage,
-                                              style: widget
-                                                  .themeData.textTheme.body2,
+                                              style: widget.themeData.textTheme
+                                                  .bodyText1,
                                             ),
                                             Icon(Icons.star,
                                                 color: Colors.green)
