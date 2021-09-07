@@ -1,5 +1,5 @@
 class GenresList {
-  List<Genres> genres;
+  List<Genres>? genres;
 
   GenresList({this.genres});
 
@@ -7,7 +7,7 @@ class GenresList {
     if (json['genres'] != null) {
       genres = [];
       json['genres'].forEach((v) {
-        genres.add(new Genres.fromJson(v));
+        genres?.add(new Genres.fromJson(v));
       });
     }
   }
@@ -15,15 +15,15 @@ class GenresList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.genres != null) {
-      data['genres'] = this.genres.map((v) => v.toJson()).toList();
+      data['genres'] = this.genres?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Genres {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   Genres({this.id, this.name});
 

@@ -12,7 +12,11 @@ class MovieDetailPage extends StatefulWidget {
   final ThemeData themeData;
   final String heroId;
   final List<Genres> genres;
-  MovieDetailPage({this.movie, this.themeData, this.heroId, this.genres});
+  MovieDetailPage(
+      {required this.movie,
+      required this.themeData,
+      required this.heroId,
+      required this.genres});
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
 }
@@ -38,7 +42,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             height: double.infinity,
                             image: NetworkImage(TMDB_BASE_IMAGE_URL +
                                 'original/' +
-                                widget.movie.backdropPath),
+                                widget.movie.backdropPath!),
                             fit: BoxFit.cover,
                             placeholder:
                                 AssetImage('assets/images/loading.gif'),
@@ -116,7 +120,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          widget.movie.title,
+                                          widget.movie.title!,
                                           style: widget
                                               .themeData.textTheme.headline5,
                                           maxLines: 2,
@@ -127,7 +131,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           child: Row(
                                             children: <Widget>[
                                               Text(
-                                                widget.movie.voteAverage,
+                                                widget.movie.voteAverage!,
                                                 style: widget.themeData
                                                     .textTheme.bodyText1,
                                               ),
@@ -147,11 +151,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                     physics: BouncingScrollPhysics(),
                                     child: Column(
                                       children: <Widget>[
-                                        widget.genres == null
+                                        widget.genres.isEmpty
                                             ? Container()
                                             : GenreList(
                                                 themeData: widget.themeData,
-                                                genres: widget.movie.genreIds,
+                                                genres:
+                                                    widget.movie.genreIds ?? [],
                                                 totalGenres: widget.genres,
                                               ),
                                         Row(
@@ -170,7 +175,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            widget.movie.overview,
+                                            widget.movie.overview!,
                                             style: widget
                                                 .themeData.textTheme.caption,
                                           ),
@@ -190,7 +195,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                         ),
                                         ScrollingArtists(
                                           api: Endpoints.getCreditsUrl(
-                                              widget.movie.id),
+                                              widget.movie.id!),
                                           title: 'Cast',
                                           tapButtonText: 'See full cast & crew',
                                           themeData: widget.themeData,
@@ -225,7 +230,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                   : FadeInImage(
                                       image: NetworkImage(TMDB_BASE_IMAGE_URL +
                                           'w500/' +
-                                          widget.movie.posterPath),
+                                          widget.movie.posterPath!),
                                       fit: BoxFit.cover,
                                       placeholder: AssetImage(
                                           'assets/images/loading.gif'),
@@ -302,11 +307,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 color: widget.themeData.accentColor, width: 3),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: cast.profilePath == null
-                                    ? AssetImage('assets/images/na.jpg')
-                                    : NetworkImage(TMDB_BASE_IMAGE_URL +
-                                        'w500/' +
-                                        cast.profilePath)),
+                                image: (cast.profilePath == null
+                                        ? AssetImage('assets/images/na.jpg')
+                                        : NetworkImage(TMDB_BASE_IMAGE_URL +
+                                            'w500/' +
+                                            cast.profilePath!))
+                                    as ImageProvider<Object>),
                             shape: BoxShape.circle),
                       ),
                     ))

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:movies/screens/login.dart';
 import 'package:movies/theme/theme_state.dart';
@@ -9,7 +11,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int option;
+  int? option;
   final List<Color> colors = [Colors.white, Color(0xff242248), Colors.black];
   final List<Color> borders = [Colors.black, Colors.white, Colors.white];
   final List<String> themes = ['Light', 'Dark', 'Amoled'];

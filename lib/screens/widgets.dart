@@ -1,5 +1,5 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movies/api/endpoints.dart';
 import 'package:movies/constants/api_constants.dart';
 import 'package:movies/modal_class/credits.dart';
@@ -13,13 +13,13 @@ import 'package:movies/screens/movie_detail.dart';
 class DiscoverMovies extends StatefulWidget {
   final ThemeData themeData;
   final List<Genres> genres;
-  DiscoverMovies({this.themeData, this.genres});
+  DiscoverMovies({required this.themeData, required this.genres});
   @override
   _DiscoverMoviesState createState() => _DiscoverMoviesState();
 }
 
 class _DiscoverMoviesState extends State<DiscoverMovies> {
-  List<Movie> moviesList;
+  List<Movie>? moviesList;
   @override
   void initState() {
     super.initState();
@@ -46,14 +46,19 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
         ),
         SizedBox(
           width: double.infinity,
-          height: 200,
+          height: 350,
           child: moviesList == null
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : Swiper(
-                  autoplay: true,
-                  itemBuilder: (BuildContext context, int index) {
+              : CarouselSlider.builder(
+                  options: CarouselOptions(
+                    disableCenter: true,
+                    viewportFraction: 0.8,
+                    enlargeCenterPage: true,
+                  ),
+                  itemBuilder:
+                      (BuildContext context, int index, pageViewIndex) {
                     return Container(
                       child: GestureDetector(
                         onTap: () {
@@ -61,20 +66,20 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MovieDetailPage(
-                                      movie: moviesList[index],
+                                      movie: moviesList![index],
                                       themeData: widget.themeData,
                                       genres: widget.genres,
                                       heroId:
-                                          '${moviesList[index].id}discover')));
+                                          '${moviesList![index].id}discover')));
                         },
                         child: Hero(
-                          tag: '${moviesList[index].id}discover',
+                          tag: '${moviesList![index].id}discover',
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: FadeInImage(
                               image: NetworkImage(TMDB_BASE_IMAGE_URL +
                                   'w500/' +
-                                  moviesList[index].posterPath),
+                                  moviesList![index].posterPath!),
                               fit: BoxFit.cover,
                               placeholder:
                                   AssetImage('assets/images/loading.gif'),
@@ -84,9 +89,7 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
                       ),
                     );
                   },
-                  itemCount: moviesList.length,
-                  viewportFraction: 0.7,
-                  scale: 0.9,
+                  itemCount: moviesList!.length,
                 ),
         ),
       ],
@@ -96,19 +99,20 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
 
 class ScrollingMovies extends StatefulWidget {
   final ThemeData themeData;
-  final String api, title;
+  final String? api, title;
   final List<Genres> genres;
-  ScrollingMovies({this.themeData, this.api, this.title, this.genres});
+  ScrollingMovies(
+      {required this.themeData, this.api, this.title, required this.genres});
   @override
   _ScrollingMoviesState createState() => _ScrollingMoviesState();
 }
 
 class _ScrollingMoviesState extends State<ScrollingMovies> {
-  List<Movie> moviesList;
+  List<Movie>? moviesList;
   @override
   void initState() {
     super.initState();
-    fetchMovies(widget.api).then((value) {
+    fetchMovies(widget.api!).then((value) {
       setState(() {
         moviesList = value;
       });
@@ -124,7 +128,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(widget.title,
+              child: Text(widget.title!,
                   style: widget.themeData.textTheme.headline5),
             ),
           ],
@@ -138,7 +142,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                 )
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: moviesList.length,
+                  itemCount: moviesList!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -149,14 +153,14 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MovieDetailPage(
-                                      movie: moviesList[index],
+                                      movie: moviesList![index],
                                       themeData: widget.themeData,
                                       genres: widget.genres,
                                       heroId:
-                                          '${moviesList[index].id}${widget.title}')));
+                                          '${moviesList![index].id}${widget.title}')));
                         },
                         child: Hero(
-                          tag: '${moviesList[index].id}${widget.title}',
+                          tag: '${moviesList![index].id}${widget.title}',
                           child: SizedBox(
                             width: 100,
                             child: Column(
@@ -167,7 +171,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                     child: FadeInImage(
                                       image: NetworkImage(TMDB_BASE_IMAGE_URL +
                                           'w500/' +
-                                          moviesList[index].posterPath),
+                                          moviesList![index].posterPath!),
                                       fit: BoxFit.cover,
                                       placeholder: AssetImage(
                                           'assets/images/loading.gif'),
@@ -177,7 +181,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    moviesList[index].title,
+                                    moviesList![index].title!,
                                     style: widget.themeData.textTheme.bodyText1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -200,18 +204,18 @@ class ParticularGenreMovies extends StatefulWidget {
   final ThemeData themeData;
   final String api;
   final List<Genres> genres;
-  ParticularGenreMovies({this.themeData, this.api, this.genres});
+  ParticularGenreMovies(
+      {required this.themeData, required this.api, required this.genres});
   @override
   _ParticularGenreMoviesState createState() => _ParticularGenreMoviesState();
 }
 
 class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
-  List<Movie> moviesList;
+  List<Movie>? moviesList;
   @override
   void initState() {
     super.initState();
     fetchMovies(widget.api).then((value) {
-      print(value.length);
       setState(() {
         moviesList = value;
       });
@@ -228,7 +232,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
             )
           : ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: moviesList.length,
+              itemCount: moviesList!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -238,10 +242,10 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => MovieDetailPage(
-                                  movie: moviesList[index],
+                                  movie: moviesList![index],
                                   themeData: widget.themeData,
                                   genres: widget.genres,
-                                  heroId: '${moviesList[index].id}')));
+                                  heroId: '${moviesList![index].id}')));
                     },
                     child: Container(
                       height: 150,
@@ -265,7 +269,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      moviesList[index].title,
+                                      moviesList![index].title!,
                                       style:
                                           widget.themeData.textTheme.bodyText2,
                                       overflow: TextOverflow.ellipsis,
@@ -275,7 +279,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                       child: Row(
                                         children: <Widget>[
                                           Text(
-                                            moviesList[index].voteAverage,
+                                            moviesList![index].voteAverage!,
                                             style: widget
                                                 .themeData.textTheme.bodyText1,
                                           ),
@@ -295,7 +299,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                             top: 0,
                             left: 8,
                             child: Hero(
-                              tag: '${moviesList[index].id}',
+                              tag: '${moviesList![index].id}',
                               child: SizedBox(
                                 width: 100,
                                 height: 125,
@@ -304,7 +308,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   child: FadeInImage(
                                     image: NetworkImage(TMDB_BASE_IMAGE_URL +
                                         'w500/' +
-                                        moviesList[index].posterPath),
+                                        moviesList![index].posterPath!),
                                     fit: BoxFit.cover,
                                     placeholder:
                                         AssetImage('assets/images/loading.gif'),
@@ -325,9 +329,9 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
 }
 
 class ScrollingArtists extends StatefulWidget {
-  final ThemeData themeData;
-  final String api, title, tapButtonText;
-  final Function(Cast) onTap;
+  final ThemeData? themeData;
+  final String? api, title, tapButtonText;
+  final Function(Cast)? onTap;
   ScrollingArtists(
       {this.themeData, this.api, this.title, this.tapButtonText, this.onTap});
   @override
@@ -335,11 +339,11 @@ class ScrollingArtists extends StatefulWidget {
 }
 
 class _ScrollingArtistsState extends State<ScrollingArtists> {
-  Credits credits;
+  Credits? credits;
   @override
   void initState() {
     super.initState();
-    fetchCredits(widget.api).then((value) {
+    fetchCredits(widget.api!).then((value) {
       setState(() {
         credits = value;
       });
@@ -355,8 +359,8 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: <Widget>[
-                    Text(widget.title,
-                        style: widget.themeData.textTheme.bodyText1),
+                    Text(widget.title!,
+                        style: widget.themeData!.textTheme.bodyText1),
                   ],
                 ),
               )
@@ -365,8 +369,8 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(widget.title,
-                        style: widget.themeData.textTheme.bodyText1),
+                    child: Text(widget.title!,
+                        style: widget.themeData!.textTheme.bodyText1),
                   ),
                   TextButton(
                     onPressed: () {
@@ -378,8 +382,8 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                     credits: credits,
                                   )));
                     },
-                    child: Text(widget.tapButtonText,
-                        style: widget.themeData.textTheme.caption),
+                    child: Text(widget.tapButtonText!,
+                        style: widget.themeData!.textTheme.caption),
                   ),
                 ],
               ),
@@ -392,14 +396,14 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                 )
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: credits.cast.length,
+                  itemCount: credits!.cast!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          widget.onTap(credits.cast[index]);
+                          widget.onTap!(credits!.cast![index]);
                         },
                         child: SizedBox(
                           width: 80,
@@ -410,30 +414,30 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                   width: 70,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    child:
-                                        credits.cast[index].profilePath == null
-                                            ? Image.asset(
-                                                'assets/images/na.jpg',
-                                                fit: BoxFit.cover,
-                                              )
-                                            : FadeInImage(
-                                                image: NetworkImage(
-                                                    TMDB_BASE_IMAGE_URL +
-                                                        'w500/' +
-                                                        credits.cast[index]
-                                                            .profilePath),
-                                                fit: BoxFit.cover,
-                                                placeholder: AssetImage(
-                                                    'assets/images/loading.gif'),
-                                              ),
+                                    child: credits!.cast![index].profilePath ==
+                                            null
+                                        ? Image.asset(
+                                            'assets/images/na.jpg',
+                                            fit: BoxFit.cover,
+                                          )
+                                        : FadeInImage(
+                                            image: NetworkImage(
+                                                TMDB_BASE_IMAGE_URL +
+                                                    'w500/' +
+                                                    credits!.cast![index]
+                                                        .profilePath!),
+                                            fit: BoxFit.cover,
+                                            placeholder: AssetImage(
+                                                'assets/images/loading.gif'),
+                                          ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  credits.cast[index].name,
-                                  style: widget.themeData.textTheme.caption,
+                                  credits!.cast![index].name!,
+                                  style: widget.themeData!.textTheme.caption,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               )
@@ -454,25 +458,31 @@ class GenreList extends StatefulWidget {
   final ThemeData themeData;
   final List<int> genres;
   final List<Genres> totalGenres;
-  GenreList({this.themeData, this.genres, this.totalGenres});
+  GenreList(
+      {required this.themeData,
+      required this.genres,
+      required this.totalGenres});
 
   @override
   _GenreListState createState() => _GenreListState();
 }
 
 class _GenreListState extends State<GenreList> {
-  List<Genres> _genres = [];
+  List<Genres>? _genres;
   @override
   void initState() {
     super.initState();
-    widget.totalGenres.forEach((valueGenre) {
-      widget.genres.forEach((genre) {
-        if (valueGenre.id == genre) {
-          _genres.add(valueGenre);
-        }
+    _genres = [];
+    Future.delayed(Duration.zero, () {
+      widget.totalGenres.forEach((valueGenre) {
+        widget.genres.forEach((genre) {
+          if (valueGenre.id == genre) {
+            _genres?.add(valueGenre);
+            setState(() {});
+          }
+        });
       });
     });
-    setState(() {});
   }
 
   @override
@@ -487,7 +497,7 @@ class _GenreListState extends State<GenreList> {
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: _genres.length,
+                  itemCount: _genres!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -498,7 +508,7 @@ class _GenreListState extends State<GenreList> {
                               MaterialPageRoute(
                                   builder: (context) => GenreMovies(
                                         themeData: widget.themeData,
-                                        genre: _genres[index],
+                                        genre: _genres![index],
                                         genres: widget.totalGenres,
                                       )));
                         },
@@ -511,7 +521,7 @@ class _GenreListState extends State<GenreList> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           label: Text(
-                            _genres[index].name,
+                            _genres![index].name!,
                             style: widget.themeData.textTheme.bodyText1,
                           ),
                           backgroundColor: Colors.transparent,
@@ -525,22 +535,21 @@ class _GenreListState extends State<GenreList> {
 }
 
 class SearchMovieWidget extends StatefulWidget {
-  final ThemeData themeData;
-  final String query;
-  final List<Genres> genres;
-  final Function(Movie) onTap;
+  final ThemeData? themeData;
+  final String? query;
+  final List<Genres>? genres;
+  final Function(Movie)? onTap;
   SearchMovieWidget({this.themeData, this.query, this.genres, this.onTap});
   @override
   _SearchMovieWidgetState createState() => _SearchMovieWidgetState();
 }
 
 class _SearchMovieWidgetState extends State<SearchMovieWidget> {
-  List<Movie> moviesList;
+  List<Movie>? moviesList;
   @override
   void initState() {
     super.initState();
-    fetchMovies(Endpoints.movieSearchUrl(widget.query)).then((value) {
-      print(value.length);
+    fetchMovies(Endpoints.movieSearchUrl(widget.query!)).then((value) {
       setState(() {
         moviesList = value;
       });
@@ -550,27 +559,27 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.themeData.primaryColor,
+      color: widget.themeData!.primaryColor,
       child: moviesList == null
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : moviesList.length == 0
+          : moviesList!.length == 0
               ? Center(
                   child: Text(
                     "Oops! couldn't find the movie",
-                    style: widget.themeData.textTheme.bodyText1,
+                    style: widget.themeData!.textTheme.bodyText1,
                   ),
                 )
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: moviesList.length,
+                  itemCount: moviesList!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          widget.onTap(moviesList[index]);
+                          widget.onTap!(moviesList![index]);
                         },
                         child: Column(
                           children: <Widget>[
@@ -582,7 +591,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                   height: 80,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
-                                    child: moviesList[index].posterPath == null
+                                    child: moviesList![index].posterPath == null
                                         ? Image.asset(
                                             'assets/images/na.jpg',
                                             fit: BoxFit.cover,
@@ -591,8 +600,8 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                             image: NetworkImage(
                                                 TMDB_BASE_IMAGE_URL +
                                                     'w500/' +
-                                                    moviesList[index]
-                                                        .posterPath),
+                                                    moviesList![index]
+                                                        .posterPath!),
                                             fit: BoxFit.cover,
                                             placeholder: AssetImage(
                                                 'assets/images/loading.gif'),
@@ -609,17 +618,17 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                           MainAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          moviesList[index].title,
+                                          moviesList![index].title!,
                                           style: widget
-                                              .themeData.textTheme.bodyText2,
+                                              .themeData!.textTheme.bodyText2,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                         ),
                                         Row(
                                           children: <Widget>[
                                             Text(
-                                              moviesList[index].voteAverage,
-                                              style: widget.themeData.textTheme
+                                              moviesList![index].voteAverage!,
+                                              style: widget.themeData!.textTheme
                                                   .bodyText1,
                                             ),
                                             Icon(Icons.star,
@@ -636,7 +645,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 24.0),
                               child: Divider(
-                                color: widget.themeData.accentColor,
+                                color: widget.themeData!.accentColor,
                               ),
                             )
                           ],

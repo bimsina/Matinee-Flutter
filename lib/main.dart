@@ -35,12 +35,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  List<Genres> _genres;
+  List<Genres> _genres = [];
   @override
   void initState() {
     super.initState();
     fetchGenres().then((value) {
-      _genres = value.genres;
+      _genres = value.genres ?? [];
     });
   }
 
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: state.themeData.accentColor,
           ),
           onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
+            _scaffoldKey.currentState?.openDrawer();
           },
         ),
         centerTitle: true,
@@ -71,21 +71,19 @@ class _MyHomePageState extends State<MyHomePage> {
             color: state.themeData.accentColor,
             icon: Icon(Icons.search),
             onPressed: () async {
-              if (_genres != null) {
-                final Movie result = await showSearch(
-                    context: context,
-                    delegate: MovieSearch(
-                        themeData: state.themeData, genres: _genres));
-                if (result != null) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MovieDetailPage(
-                              movie: result,
-                              themeData: state.themeData,
-                              genres: _genres,
-                              heroId: '${result.id}search')));
-                }
+              final Movie? result = await showSearch<Movie?>(
+                  context: context,
+                  delegate:
+                      MovieSearch(themeData: state.themeData, genres: _genres));
+              if (result != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MovieDetailPage(
+                            movie: result,
+                            themeData: state.themeData,
+                            genres: _genres,
+                            heroId: '${result.id}search')));
               }
             },
           )

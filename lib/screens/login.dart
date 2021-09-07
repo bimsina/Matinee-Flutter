@@ -1,17 +1,19 @@
+
+
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  final ThemeData themeData;
+  final ThemeData? themeData;
   LoginScreen({this.themeData});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeData.primaryColor,
+        backgroundColor: themeData!.primaryColor,
         leading: IconButton(
           icon: Icon(
             Icons.clear,
-            color: themeData.accentColor,
+            color: themeData!.accentColor,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -19,15 +21,15 @@ class LoginScreen extends StatelessWidget {
         ),
         title: Text(
           'Log In',
-          style: themeData.textTheme.headline5,
+          style: themeData!.textTheme.headline5,
         ),
       ),
       body: Container(
-        color: themeData.primaryColor,
+        color: themeData!.primaryColor,
         child: Center(
           child: Text(
             'Coming Soon.',
-            style: themeData.textTheme.bodyText1,
+            style: themeData!.textTheme.bodyText1,
           ),
         ),
       ),

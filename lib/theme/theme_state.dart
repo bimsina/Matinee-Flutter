@@ -5,10 +5,10 @@ import 'utils.dart';
 enum ThemeStateEnum { light, dark, amoled }
 
 class ThemeState extends ChangeNotifier {
-  SharedPreferences _sharedPreferences;
+  SharedPreferences? _sharedPreferences;
   ThemeData _themeData = kLightTheme;
 
-  get themeData => _themeData;
+  ThemeData get themeData => _themeData;
   set themeData(ThemeData val) {
     _themeData = val;
     notifyListeners();
@@ -40,11 +40,11 @@ class ThemeState extends ChangeNotifier {
 
   void saveOptionValue(ThemeStateEnum optionValue) {
     _switchTheme(optionValue);
-    _sharedPreferences.setInt('theme_option', optionValue.index);
+    _sharedPreferences?.setInt('theme_option', optionValue.index);
   }
 
   ThemeStateEnum _getOption() {
-    int option = _sharedPreferences.get('theme_option') ?? 1;
+    int option = _sharedPreferences?.get('theme_option') as int? ?? 1;
     return ThemeStateEnum.values[option];
   }
 }

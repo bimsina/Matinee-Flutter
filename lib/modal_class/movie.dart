@@ -1,8 +1,10 @@
+
+
 class MovieList {
-  int page;
-  int totalMovies;
-  int totalPages;
-  List<Movie> movies;
+  int? page;
+  int? totalMovies;
+  int? totalPages;
+  List<Movie>? movies;
 
   MovieList({this.page, this.totalMovies, this.totalPages, this.movies});
 
@@ -13,7 +15,7 @@ class MovieList {
     if (json['results'] != null) {
       movies = [];
       json['results'].forEach((v) {
-        movies.add(new Movie.fromJson(v));
+        movies!.add(new Movie.fromJson(v));
       });
     }
   }
@@ -24,27 +26,27 @@ class MovieList {
     data['total_results'] = this.totalMovies;
     data['total_pages'] = this.totalPages;
     if (this.movies != null) {
-      data['results'] = this.movies.map((v) => v.toJson()).toList();
+      data['results'] = this.movies!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Movie {
-  int voteCount;
-  int id;
-  bool video;
-  String voteAverage;
-  String title;
-  double popularity;
-  String posterPath;
-  String originalLanguage;
-  String originalTitle;
-  List<int> genreIds;
-  String backdropPath;
-  bool adult;
-  String overview;
-  String releaseDate;
+  int? voteCount;
+  int? id;
+  bool? video;
+  String? voteAverage;
+  String? title;
+  double? popularity;
+  String? posterPath;
+  String? originalLanguage;
+  String? originalTitle;
+  List<int>? genreIds;
+  String? backdropPath;
+  bool? adult;
+  String? overview;
+  String? releaseDate;
 
   Movie(
       {this.voteCount,

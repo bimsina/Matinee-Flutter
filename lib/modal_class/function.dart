@@ -10,7 +10,7 @@ Future<List<Movie>> fetchMovies(String api) async {
   var res = await http.get(Uri.parse(api));
   var decodeRes = jsonDecode(res.body);
   movieList = MovieList.fromJson(decodeRes);
-  return movieList.movies;
+  return movieList.movies ?? [];
 }
 
 Future<Credits> fetchCredits(String api) async {
