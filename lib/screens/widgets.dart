@@ -39,8 +39,8 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  Text('Discover', style: widget.themeData.textTheme.headline5),
+              child: Text('Discover',
+                  style: widget.themeData.textTheme.headlineSmall),
             ),
           ],
         ),
@@ -129,7 +129,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(widget.title!,
-                  style: widget.themeData.textTheme.headline5),
+                  style: widget.themeData.textTheme.headlineSmall),
             ),
           ],
         ),
@@ -182,7 +182,7 @@ class _ScrollingMoviesState extends State<ScrollingMovies> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     moviesList![index].title!,
-                                    style: widget.themeData.textTheme.bodyText1,
+                                    style: widget.themeData.textTheme.bodyLarge,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 )
@@ -225,7 +225,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.themeData.primaryColor.withOpacity(0.8),
+      color: widget.themeData.primaryColor.withValues(alpha: 0.8),
       child: moviesList == null
           ? Center(
               child: CircularProgressIndicator(),
@@ -260,7 +260,8 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
                                       width: 1,
-                                      color: widget.themeData.accentColor)),
+                                      color: widget
+                                          .themeData.colorScheme.secondary)),
                               height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -271,7 +272,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                     Text(
                                       moviesList![index].title!,
                                       style:
-                                          widget.themeData.textTheme.bodyText2,
+                                          widget.themeData.textTheme.bodyMedium,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Padding(
@@ -281,7 +282,7 @@ class _ParticularGenreMoviesState extends State<ParticularGenreMovies> {
                                           Text(
                                             moviesList![index].voteAverage!,
                                             style: widget
-                                                .themeData.textTheme.bodyText1,
+                                                .themeData.textTheme.bodyLarge,
                                           ),
                                           Icon(
                                             Icons.star,
@@ -360,7 +361,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                 child: Row(
                   children: <Widget>[
                     Text(widget.title!,
-                        style: widget.themeData!.textTheme.bodyText1),
+                        style: widget.themeData!.textTheme.bodyLarge),
                   ],
                 ),
               )
@@ -370,7 +371,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(widget.title!,
-                        style: widget.themeData!.textTheme.bodyText1),
+                        style: widget.themeData!.textTheme.bodyLarge),
                   ),
                   TextButton(
                     onPressed: () {
@@ -383,7 +384,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                   )));
                     },
                     child: Text(widget.tapButtonText!,
-                        style: widget.themeData!.textTheme.caption),
+                        style: widget.themeData!.textTheme.bodySmall),
                   ),
                 ],
               ),
@@ -437,7 +438,7 @@ class _ScrollingArtistsState extends State<ScrollingArtists> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   credits!.cast![index].name!,
-                                  style: widget.themeData!.textTheme.caption,
+                                  style: widget.themeData!.textTheme.bodySmall,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               )
@@ -517,12 +518,12 @@ class _GenreListState extends State<GenreList> {
                             side: BorderSide(
                                 width: 1,
                                 style: BorderStyle.solid,
-                                color: widget.themeData.accentColor),
+                                color: widget.themeData.colorScheme.secondary),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           label: Text(
                             _genres![index].name!,
-                            style: widget.themeData.textTheme.bodyText1,
+                            style: widget.themeData.textTheme.bodyLarge,
                           ),
                           backgroundColor: Colors.transparent,
                         ),
@@ -568,7 +569,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
               ? Center(
                   child: Text(
                     "Oops! couldn't find the movie",
-                    style: widget.themeData!.textTheme.bodyText1,
+                    style: widget.themeData!.textTheme.bodyLarge,
                   ),
                 )
               : ListView.builder(
@@ -620,7 +621,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                         Text(
                                           moviesList![index].title!,
                                           style: widget
-                                              .themeData!.textTheme.bodyText2,
+                                              .themeData!.textTheme.bodyMedium,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                         ),
@@ -629,7 +630,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                                             Text(
                                               moviesList![index].voteAverage!,
                                               style: widget.themeData!.textTheme
-                                                  .bodyText1,
+                                                  .bodyLarge,
                                             ),
                                             Icon(Icons.star,
                                                 color: Colors.green)
@@ -645,7 +646,7 @@ class _SearchMovieWidgetState extends State<SearchMovieWidget> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 24.0),
                               child: Divider(
-                                color: widget.themeData!.accentColor,
+                                color: widget.themeData!.colorScheme.secondary,
                               ),
                             )
                           ],

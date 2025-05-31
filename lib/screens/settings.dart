@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:movies/screens/login.dart';
 import 'package:movies/theme/theme_state.dart';
@@ -42,7 +40,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: CircleAvatar(
-                              backgroundColor: state.themeData.accentColor,
+                              backgroundColor:
+                                  state.themeData.colorScheme.secondary,
                               radius: 40,
                               child: Icon(
                                 Icons.person_outline,
@@ -61,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           },
                           child: Text(
                             'Log In / Sign Up',
-                            style: state.themeData.textTheme.bodyText1,
+                            style: state.themeData.textTheme.bodyLarge,
                           ),
                         ),
                       ],
@@ -75,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: <Widget>[
                     Text(
                       'Theme',
-                      style: state.themeData.textTheme.bodyText1,
+                      style: state.themeData.textTheme.bodyLarge,
                     ),
                   ],
                 ),
@@ -105,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                 ),
                                 Text(themes[index],
-                                    style: state.themeData.textTheme.bodyText1)
+                                    style: state.themeData.textTheme.bodyLarge)
                               ],
                             ),
                             Column(
@@ -139,14 +138,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                       child: state.themeData.primaryColor ==
                                               colors[index]
                                           ? Icon(Icons.done,
-                                              color:
-                                                  state.themeData.accentColor)
+                                              color: state.themeData.colorScheme
+                                                  .secondary)
                                           : Container(),
                                     ),
                                   ),
                                 ),
                                 Text(themes[index],
-                                    style: state.themeData.textTheme.bodyText1)
+                                    style: state.themeData.textTheme.bodyLarge)
                               ],
                             ),
                           ],

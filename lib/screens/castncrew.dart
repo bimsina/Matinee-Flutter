@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:movies/constants/api_constants.dart';
 import 'package:movies/modal_class/credits.dart';
@@ -18,30 +16,30 @@ class CastAndCrew extends StatelessWidget {
           backgroundColor: themeData!.primaryColor,
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: themeData!.accentColor,
+            indicatorColor: themeData!.colorScheme.secondary,
             tabs: [
               Tab(
                 child: Text(
                   'Cast',
-                  style: themeData!.textTheme.bodyText1,
+                  style: themeData!.textTheme.bodyLarge,
                 ),
               ),
               Tab(
                 child: Text(
                   'Crew',
-                  style: themeData!.textTheme.bodyText1,
+                  style: themeData!.textTheme.bodyLarge,
                 ),
               ),
             ],
           ),
           title: Text(
             'Cast And Crew',
-            style: themeData!.textTheme.headline5,
+            style: themeData!.textTheme.headlineSmall,
           ),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: themeData!.accentColor,
+              color: themeData!.colorScheme.secondary,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -97,12 +95,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits!.cast![index].name!,
-                          style: themeData!.textTheme.bodyText2,
+                          style: themeData!.textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Character : ' + credits!.cast![index].character!,
-                          style: themeData!.textTheme.bodyText1,
+                          style: themeData!.textTheme.bodyLarge,
                         ),
                       ],
                     ),
@@ -158,12 +156,12 @@ class CastAndCrew extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Name : ' + credits!.crew![index].name!,
-                          style: themeData!.textTheme.bodyText2,
+                          style: themeData!.textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Job : ' + credits!.crew![index].job!,
-                          style: themeData!.textTheme.bodyText1,
+                          style: themeData!.textTheme.bodyLarge,
                         ),
                       ],
                     ),

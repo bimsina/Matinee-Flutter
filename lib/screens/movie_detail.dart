@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:movies/api/endpoints.dart';
 import 'package:movies/constants/api_constants.dart';
 import 'package:movies/modal_class/credits.dart';
@@ -54,10 +53,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                               begin: FractionalOffset.bottomCenter,
                               end: FractionalOffset.topCenter,
                               colors: [
-                                widget.themeData.accentColor,
-                                widget.themeData.accentColor.withOpacity(0.3),
-                                widget.themeData.accentColor.withOpacity(0.2),
-                                widget.themeData.accentColor.withOpacity(0.1),
+                                widget.themeData.colorScheme.secondary,
+                                widget.themeData.colorScheme.secondary
+                                    .withValues(alpha: .3),
+                                widget.themeData.colorScheme.secondary
+                                    .withValues(alpha: .2),
+                                widget.themeData.colorScheme.secondary
+                                    .withValues(alpha: .1),
                               ],
                               stops: [
                                 0.0,
@@ -71,7 +73,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
               Expanded(
                 child: Container(
-                  color: widget.themeData.accentColor,
+                  color: widget.themeData.colorScheme.secondary,
                 ),
               )
             ],
@@ -84,7 +86,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back,
-                    color: widget.themeData.accentColor,
+                    color: widget.themeData.colorScheme.secondary,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -121,8 +123,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                       children: <Widget>[
                                         Text(
                                           widget.movie.title!,
-                                          style: widget
-                                              .themeData.textTheme.headline5,
+                                          style: widget.themeData.textTheme
+                                              .headlineSmall,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -133,7 +135,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               Text(
                                                 widget.movie.voteAverage!,
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
                                               Icon(
                                                 Icons.star,
@@ -167,7 +169,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               child: Text(
                                                 'Overview',
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
                                             ),
                                           ],
@@ -177,7 +179,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                           child: Text(
                                             widget.movie.overview!,
                                             style: widget
-                                                .themeData.textTheme.caption,
+                                                .themeData.textTheme.bodySmall,
                                           ),
                                         ),
                                         Row(
@@ -188,7 +190,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                               child: Text(
                                                 'Release date : ${widget.movie.releaseDate}',
                                                 style: widget.themeData
-                                                    .textTheme.bodyText1,
+                                                    .textTheme.bodyLarge,
                                               ),
                                             ),
                                           ],
@@ -278,15 +280,18 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 children: <Widget>[
                                   Text(
                                     '${cast.name}',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     'as',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                   Text(
                                     '${cast.character}',
-                                    style: widget.themeData.textTheme.bodyText2,
+                                    style:
+                                        widget.themeData.textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
@@ -304,7 +309,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         decoration: BoxDecoration(
                             color: widget.themeData.primaryColor,
                             border: Border.all(
-                                color: widget.themeData.accentColor, width: 3),
+                                color: widget.themeData.colorScheme.secondary,
+                                width: 3),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: (cast.profilePath == null
